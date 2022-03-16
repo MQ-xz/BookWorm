@@ -1,4 +1,3 @@
-from cmath import log
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views import View
@@ -11,7 +10,12 @@ from .forms import *
 # Create your views here.
 def index(request):
     if request.user.is_authenticated:
-        return render(request, 'index.html')
+        notes = note.objects.filter(owner=request.user)
+        context = {
+            'user': request.user,
+            'notes': notes
+        }
+        return render(request=request, template_name="Main/index.html", context=context)
     else:
         return HttpResponseRedirect('login')
 
@@ -34,7 +38,7 @@ class Login(View):
             else:
                 messages.error(request, "Invalid username or password.")
         else:
-            messages.error(request, "Invalid username or password.")
+            messages.warning(request, "Invalid username or password.")
         return render(request=request, template_name="Auth/login.html", context={"form": form})
 
 
@@ -52,7 +56,7 @@ class SignUp(View):
             return redirect(index)
         else:
             for msg in form.error_messages:
-                messages.error(request, f"{msg}: {form.error_messages[msg]}")
+                messages.warning(request, f"{msg}: {form.error_messages[msg]}")
             return render(request, 'Auth/signup.html', {'form': form})
 
 
@@ -88,7 +92,35 @@ class NewNote(View):
 
     def post(self, request):
         form = NoteForm(request.POST)
-        print(form)
         if form.is_valid():
-            print(form)
+            form.owner_id = request.user.id
+            form.save()
         return render(request, 'Note/new.html', {'form': form})
+
+
+class Note(View):
+    def get(self, request, link):
+        noteData = note.objects.get(url=link)
+        context = {
+            'note': noteData,
+        }
+
+        try:
+            user = noteUser.objects.get(note=noteData, user=request.user)
+            user_can_edit = user.can_edit
+        except Exception:
+            user = False
+            user_can_edit = False
+
+        if request.user == noteData.owner or user_can_edit:
+            notes = note.objects.filter(owner=request.user)
+            context['notes'] = notes
+            return render(request, 'Note/index.html', context=context)
+        elif noteData.visibility == 'private' and user:
+            context['visibility'] = 'private view only'
+            return render(request, 'Note/view.html', context=context)
+        elif noteData.visibility == 'public' or noteData.visibility == 'whitelist':
+            context['visibility'] = noteData.visibility
+            return render(request, 'Note/view.html', context=context)
+        else:
+            return HttpResponse("You don't have access to this note", )

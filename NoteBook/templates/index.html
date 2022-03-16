@@ -1,9 +1,7 @@
 {% extends 'base.html' %}
 {% block title%} Home {% endblock %}
 {% block content %}
-<h1>Hello B00kW0rms 😊 !</h1>
-<p>
-    This is the home page.
-</p>
+<h1>Hello {{ user }} B00kW0rms 😊 !</h1>
+
 <a href="{% url 'logout' %}">logout</a>
 {% endblock %}

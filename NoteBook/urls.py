@@ -12,4 +12,5 @@ urlpatterns = [
     path('changePassword', ChangePassword.as_view(), name='changePassword'),
 
     path('newNote', NewNote.as_view(), name='newNote'),
+    path('note/<slug:link>', Note.as_view(), name='note'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
