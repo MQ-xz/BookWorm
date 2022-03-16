@@ -1,5 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.forms.models import ModelForm
+from .models import *
 
 
 class SignUpForm(UserCreationForm):
@@ -13,3 +15,10 @@ class SignUpForm(UserCreationForm):
         if commit:
             user.save()
         return user
+
+
+class NoteForm(ModelForm):
+
+    class Meta:
+        model = note
+        fields = ['name', 'description', 'content', 'visibility']
