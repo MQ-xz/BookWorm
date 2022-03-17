@@ -2,21 +2,75 @@
 {% load static %}
 {% block content %}
 
-<div class="row">
-    <div class="col-md-2">
-        <div>
-            <img src=" {% static 'Images/logo.jpg' %}" alt="Logo" style="width: 200px;">
+<div class="row" style="margin: 5px;">
+    <div class="col-md-2" style="min-height: 789px;">
+        <div class="dropdown">
+            <button class="btn btn-light dropdown-toggle" data-mdb-ripple-color="dark" type="button"
+                id="dropdownMenuButton" data-mdb-toggle="dropdown" aria-expanded="false" style="width: 100%;">
+                <img src="https://i.pravatar.cc/150?img=47" alt="Avatar" class="avatar"
+                    style="width: 50px; border-radius: 50%;">
+                <span>{{user}}</span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="width: 100%">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="{% url 'settings' %}">settings</a></li>
+                <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+            </ul>
         </div>
-        <h4>Hello {{ user }},<br> Welcome back 😊 !</h4>
         <hr>
-        {% for note in notes %}
-        <a href="{% url 'note' note.url %}"> {{ note.name }} </a><br>
-        {% endfor %}
+
+        <div class="">
+            <center>
+                <h6><u>Your Works</u></h6>
+            </center>
+
+            <div class="nav flex-column nav-tabs text-center" id="v-tabs-tab" role="tablist"
+                aria-orientation="vertical">
+                {% for note in notes %}
+                <a class="nav-link {% if note.url == url %} active {% endif %}"
+                    href="{% url 'note' note.url %}">{{note.title}}</a>
+                {% endfor %}
+            </div>
+            <p data-mdb-toggle="modal" data-mdb-target="#exampleModal" style="text-align: right; margin-top: 10px;">New
+                note+</p>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">New Note</h5>
+                            <button type="button" class="btn-close" data-mdb-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <form action="{% url 'newNote' %}" method="post">
+                            {% csrf_token %}
+                            <div class="modal-body">
+                                <div class="form-outline mb-4">
+                                    <input type="text" id="title" name="{{ form.title.name }}" class="form-control"
+                                        required />
+                                    <label class="form-label" for="title">{{ form.title.label }}</label>
+                                </div>
+                                <div class="form-outline mb-4">
+                                    <input type="text" id="description" name="description" class="form-control"
+                                        required />
+                                    <label class="form-label" for="description">Description</label>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Create</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- </a> -->
+        </div>
         <hr>
-        <a href="{% url 'logout' %}">logout</a>
     </div>
 
-    <div class="col-md-10">
+    <div class="col-md-10" style="border-style: solid;">
         {% block index %}
         {% endblock %}
     </div>

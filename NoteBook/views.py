@@ -5,6 +5,9 @@ from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth import login, authenticate, logout, update_session_auth_hash
 from django.contrib import messages
 from .forms import *
+from django.utils.text import slugify
+import string
+import random
 
 
 # Create your views here.
@@ -87,22 +90,47 @@ class ChangePassword(View):
 
 class NewNote(View):
     def get(self, request):
-        form = NoteForm()
+        Note = note.objects.get(id=3)
+        form = NoteForm(instance=Note)
         return render(request, 'Note/new.html', {'form': form})
 
     def post(self, request):
-        form = NoteForm(request.POST)
-        if form.is_valid():
-            form.owner_id = request.user.id
-            form.save()
-        return render(request, 'Note/new.html', {'form': form})
+        url = slugify(request.POST['title'] + '-' + ''.join(random.choices(string.ascii_lowercase + string.digits, k=6)))
+        try:
+            note.objects.create(
+                title=request.POST['title'],
+                description=request.POST['description'],
+                owner_id=request.user.id,
+                url=url
+            )
+            return redirect(f'note/{url}')
+        except Exception as e:
+            return HttpResponse(e)
+
+
+    # def post(self, request):
+    #     data = {
+    #         'title': request.POST['title'],
+    #         'description': request.POST['description'],
+    #     }
+    #     data['owner_id'] = request.user.id
+    #     data['url'] = slugify(request.POST['title'] + '-' + ''.join(random.choices(string.ascii_lowercase + string.digits, k=6)))
+    #     print(data)
+    #     note.objects.create(data)
+    #     return HttpResponse(f'hehe {data}')
 
 
 class Note(View):
     def get(self, request, link):
+        try:
+            mode = request.GET['mode']
+        except Exception:
+            mode = 'view'
+
         noteData = note.objects.get(url=link)
         context = {
             'note': noteData,
+            'url': link
         }
 
         try:
@@ -115,7 +143,14 @@ class Note(View):
         if request.user == noteData.owner or user_can_edit:
             notes = note.objects.filter(owner=request.user)
             context['notes'] = notes
-            return render(request, 'Note/index.html', context=context)
+            context['mode'] = mode
+            if mode == 'edit':
+                context['form'] = NoteForm(instance=noteData)
+                print(mode)
+                return render(request, 'Note/index.html', context=context)
+            else:
+                context['form'] = NoteForm()
+                return render(request, 'Note/index.html', context=context)
         elif noteData.visibility == 'private' and user:
             context['visibility'] = 'private view only'
             return render(request, 'Note/view.html', context=context)
@@ -124,3 +159,8 @@ class Note(View):
             return render(request, 'Note/view.html', context=context)
         else:
             return HttpResponse("You don't have access to this note", )
+
+
+class Settings(View):
+    def get(self, request):
+        return HttpResponse('hehe')

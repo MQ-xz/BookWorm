@@ -18,7 +18,6 @@ class SignUpForm(UserCreationForm):
 
 
 class NoteForm(ModelForm):
-
     class Meta:
         model = note
-        fields = ['name', 'description', 'content', 'visibility']
+        fields = ['title', 'description', 'content', 'visibility']

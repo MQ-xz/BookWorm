@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django_editorjs import EditorJsField
+from django_quill.fields import QuillField
 
 
 # Create your models here.
@@ -12,9 +12,9 @@ class note(models.Model):
         ('whitelist', 'Whitelist'),
     )
 
-    name = models.CharField(max_length=200)
+    title = models.CharField(max_length=200)
     description = models.TextField()
-    content = EditorJsField()
+    content = QuillField()
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     url = models.SlugField(max_length=300, unique=True)
     visibility = models.CharField(choices=VISIBILITY, default='private', max_length=10)
@@ -22,7 +22,7 @@ class note(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.name
+        return self.title
 
 
 class noteUser(models.Model):

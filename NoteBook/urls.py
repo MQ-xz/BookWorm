@@ -13,4 +13,9 @@ urlpatterns = [
 
     path('newNote', NewNote.as_view(), name='newNote'),
     path('note/<slug:link>', Note.as_view(), name='note'),
+    # path('note/<slug:link>',)
+
+    # path('editorjs_image_upload', ImageUpload.as_view(), name="editorjs_image_upload")
+    path('editorjs', include('django_editorjs_fields.urls')),
+    path('settings', Settings.as_view(), name='settings')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
