@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.views import View
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth import login, authenticate, logout, update_session_auth_hash
@@ -8,6 +8,7 @@ from .forms import *
 from django.utils.text import slugify
 import string
 import random
+import json
 
 
 # Create your views here.
@@ -103,21 +104,9 @@ class NewNote(View):
                 owner_id=request.user.id,
                 url=url
             )
-            return redirect(f'note/{url}')
+            return redirect(f'note/{url}?mode=edit')
         except Exception as e:
             return HttpResponse(e)
-
-
-    # def post(self, request):
-    #     data = {
-    #         'title': request.POST['title'],
-    #         'description': request.POST['description'],
-    #     }
-    #     data['owner_id'] = request.user.id
-    #     data['url'] = slugify(request.POST['title'] + '-' + ''.join(random.choices(string.ascii_lowercase + string.digits, k=6)))
-    #     print(data)
-    #     note.objects.create(data)
-    #     return HttpResponse(f'hehe {data}')
 
 
 class Note(View):
@@ -146,7 +135,6 @@ class Note(View):
             context['mode'] = mode
             if mode == 'edit':
                 context['form'] = NoteForm(instance=noteData)
-                print(mode)
                 return render(request, 'Note/index.html', context=context)
             else:
                 context['form'] = NoteForm()
@@ -159,6 +147,20 @@ class Note(View):
             return render(request, 'Note/view.html', context=context)
         else:
             return HttpResponse("You don't have access to this note", )
+
+    def post(self, request, link):
+        # update note
+        try:
+            note.objects.filter(url=link).update(content=request.POST['content'])
+            return redirect(f'./{link}?mode=edit')
+        except Exception as e:
+            return HttpResponse(e)
+
+
+class UpdateNote(View):
+    def post(self, request, link):
+        print(json.loads(request.body))
+        return JsonResponse({'status': 'ok'})
 
 
 class Settings(View):
