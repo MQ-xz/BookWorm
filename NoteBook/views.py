@@ -162,7 +162,7 @@ class UpdateNote(View):
     def post(self, request, link):
         prompt = json.loads(request.body)['content']
         print(prompt)
-        # data = getRecommendation(prompt)
+        data = getRecommendation(prompt)
         print('data')
         return JsonResponse({'status': 'ok', 'content': 'data'})
 
