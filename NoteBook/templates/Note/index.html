@@ -26,7 +26,7 @@
 </div>
 
 {% if mode == 'edit' %}
-<form method="post">
+<form method="post" onkeydown="isKeyPressed(event)">
     {% csrf_token %}
     {{ form.content }}
     <button type="submit">Save</button>
@@ -40,18 +40,44 @@
     // setInterval(function () {
     //     console.log('hehe')
     // }, 6000);
-    let text = document.getElementsByClassName('ql-editor')[0];
-    text.addEventListener('input', function () {
-        console.log(text.innerText);
-        fetch('/updateNote/{{ note.url }}', {
-            method: 'POST',
-            headers: {
-                'X-CSRFToken': '{{ csrf_token }}'
-            },
-            body: JSON.stringify({
-                content: text.innerText
-            }),
-        })
-    });
+    // let text = document.getElementsByClassName('ql-editor')[0];
+    // text.addEventListener('input', function (event) {
+    //     console.log(text.innerText);
+    // if (event.shiftKey && event.keyCode == 9) {
+    //     console.log("The SHIFT key was pressed!");
+    // } else {
+    //     console.log("The SHIFT key was not pressed!");
+    // }
+    // fetch('/updateNote/{{ note.url }}', {
+    //     method: 'POST',
+    //     headers: {
+    //         'X-CSRFToken': '{{ csrf_token }}'
+    //     },
+    //     body: JSON.stringify({
+    //         content: text.innerText
+    //     }),
+    // })
+    // });
+
+    function test(data) {
+        console.log(data)
+        document.getElementsByClassName('ql-editor')[0].innerText += data['content'];
+    }
+
+    function isKeyPressed(event) {
+        if (event.shiftKey) {
+            let text = document.getElementsByClassName('ql-editor')[0];
+            fetch('/updateNote/{{ note.url }}', {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                body: JSON.stringify({
+                    content: text.innerText
+                })
+            }).then(response => response.json())
+                .then(data => test(data));
+        }
+    }
 </script>
 {% endblock %}

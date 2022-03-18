@@ -9,6 +9,7 @@ from django.utils.text import slugify
 import string
 import random
 import json
+from .REngine.GPT import getRecommendation
 
 
 # Create your views here.
@@ -159,8 +160,11 @@ class Note(View):
 
 class UpdateNote(View):
     def post(self, request, link):
-        print(json.loads(request.body))
-        return JsonResponse({'status': 'ok'})
+        prompt = json.loads(request.body)['content']
+        print(prompt)
+        # data = getRecommendation(prompt)
+        print('data')
+        return JsonResponse({'status': 'ok', 'content': 'data'})
 
 
 class Settings(View):
