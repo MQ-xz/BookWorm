@@ -184,6 +184,7 @@ class NoteUser(View):
         except Exception as e:
             return messages.error(request, e)
 
+
 class UpdateNote(View):
     def post(self, request, link):
         prompt = json.loads(request.body)['content']
