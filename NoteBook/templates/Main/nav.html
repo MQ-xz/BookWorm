@@ -4,6 +4,7 @@
 
 <div class="row" style="margin: 5px;">
     <div class="col-md-2" style="min-height: 789px;">
+        {% if user.is_authenticated %}
         <div class="dropdown">
             <button class="btn btn-light dropdown-toggle" data-mdb-ripple-color="dark" type="button"
                 id="dropdownMenuButton" data-mdb-toggle="dropdown" aria-expanded="false" style="width: 100%;">
@@ -34,8 +35,7 @@
             <p data-mdb-toggle="modal" data-mdb-target="#newNote" style="text-align: right; margin-top: 10px;">New
                 note+</p>
             <!-- Modal -->
-            <div class="modal fade" id="newNote" tabindex="-1" aria-labelledby="newNoteLabel"
-                aria-hidden="true">
+            <div class="modal fade" id="newNote" tabindex="-1" aria-labelledby="newNoteLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -66,6 +66,16 @@
             </div>
             <!-- </a> -->
         </div>
+        {% else %}
+        <h4>Welcome to BookWorm</h4>
+        <img src="{% static 'Images/logo.jpg' %}" alt="" width="275px">
+        <br>
+        <a href="{% url 'login' %}">
+            <button type="button" class="btn btn-light" data-mdb-ripple-color="dark">Start your First Note by
+                Login/Signup</button>
+
+        </a>
+        {% endif %}
         <hr>
     </div>
 
