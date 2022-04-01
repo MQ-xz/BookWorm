@@ -1,3 +1,4 @@
+from ast import Pass
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.views import View
@@ -20,6 +21,9 @@ def index(request):
             'user': request.user,
             'notes': notes
         }
+        if note:
+            last_edited = note.objects.filter(owner=request.user).order_by('-updated_at')[0].url
+            return redirect('note', last_edited)
         return render(request=request, template_name="Main/index.html", context=context)
     else:
         return HttpResponseRedirect('login')
@@ -118,9 +122,13 @@ class Note(View):
             mode = 'view'
 
         noteData = note.objects.get(url=link)
+        visibilityForm = NoteVisibilityForm(instance=noteData)
+        noteUsersForm = NoteUserForm(instance=noteData)
         context = {
             'note': noteData,
-            'url': link
+            'url': link,
+            'visibilityForm': visibilityForm,
+            'noteUsersForm': noteUsersForm,
         }
 
         try:
@@ -158,11 +166,29 @@ class Note(View):
             return HttpResponse(e)
 
 
+class NoteVisibility(View):
+    def post(self, request, link):
+        try:
+            note.objects.filter(url=link).update(visibility=request.POST['visibility'])
+            messages.success(request, "Note visibility updated successfully!")
+            return redirect(request.META['HTTP_REFERER'])
+        except Exception as e:
+            return messages.error(request, e)
+
+
+class NoteUser(View):
+    def post(self, request, link):
+        try:
+            noteUser.objects.filter(note=link).update(can_edit=request.POST['can_edit'])
+            return redirect(request.META['HTTP_REFERER'])
+        except Exception as e:
+            return messages.error(request, e)
+
 class UpdateNote(View):
     def post(self, request, link):
         prompt = json.loads(request.body)['content']
         print(prompt)
-        data = getRecommendation(prompt)
+        # data = getRecommendation(prompt)
         print('data')
         return JsonResponse({'status': 'ok', 'content': 'data'})
 

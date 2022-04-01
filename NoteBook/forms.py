@@ -21,3 +21,15 @@ class NoteForm(ModelForm):
     class Meta:
         model = note
         fields = ['title', 'description', 'content', 'visibility']
+
+
+class NoteVisibilityForm(ModelForm):
+    class Meta:
+        model = note
+        fields = ['visibility']
+
+
+class NoteUserForm(ModelForm):
+    class Meta:
+        model = noteUser
+        fields = ['user', 'can_edit']

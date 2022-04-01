@@ -31,15 +31,15 @@
                     href="{% url 'note' note.url %}">{{note.title}}</a>
                 {% endfor %}
             </div>
-            <p data-mdb-toggle="modal" data-mdb-target="#exampleModal" style="text-align: right; margin-top: 10px;">New
+            <p data-mdb-toggle="modal" data-mdb-target="#newNote" style="text-align: right; margin-top: 10px;">New
                 note+</p>
             <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            <div class="modal fade" id="newNote" tabindex="-1" aria-labelledby="newNoteLabel"
                 aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">New Note</h5>
+                            <h5 class="modal-title" id="newNoteLabel">New Note</h5>
                             <button type="button" class="btn-close" data-mdb-dismiss="modal"
                                 aria-label="Close"></button>
                         </div>

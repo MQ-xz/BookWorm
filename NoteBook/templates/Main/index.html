@@ -1,6 +1,16 @@
 {% extends 'Main/nav.html' %}
+{% load static %}
 {% block title%} Home {% endblock %}
 {% block index %}
-hehe
-
+<div class="container">
+    <div class="col">
+        <div class="text-center" style="margin-top: 10%;">
+            <h1>Welcome to BookWorm</h1>
+            <img src="{% static 'Images/logo.jpg' %}" alt="">
+            <br>
+            <button type="button" class="btn btn-light" data-mdb-ripple-color="dark" data-mdb-toggle="modal"
+                data-mdb-target="#newNote">Start your First Note</button>
+        </div>
+    </div>
+</div>
 {% endblock %}

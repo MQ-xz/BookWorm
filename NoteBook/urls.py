@@ -14,6 +14,8 @@ urlpatterns = [
     path('newNote', NewNote.as_view(), name='newNote'),
     path('note/<slug:link>', Note.as_view(), name='note'),
     path('updateNote/<slug:link>', UpdateNote.as_view(), name='updateNote'),
+    path('NoteVisibility/<slug:link>', NoteVisibility.as_view(), name='NoteVisibility'),
+    path('NoteUser/<slug:link>', NoteUser.as_view(), name='NoteUser'),
 
     path('settings', Settings.as_view(), name='settings')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
