@@ -1,4 +1,5 @@
 from email import message
+from xml.etree.ElementInclude import include
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.views import View
@@ -212,3 +213,10 @@ class Recommendation(View):
 class Settings(View):
     def get(self, request):
         return HttpResponse('hehe')
+
+
+class UserSearch(View):
+    def get(self, request):
+        users = User.objects.filter(username__startswith=request.GET['username'])
+        print(users)
+        return JsonResponse(list(users.values('username', 'email')), safe=False)

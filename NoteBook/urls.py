@@ -18,5 +18,7 @@ urlpatterns = [
 
     path('recommendation', Recommendation.as_view(), name='recommendation'),
 
+    path('users', UserSearch.as_view(), name='userSearch'),
+
     path('settings', Settings.as_view(), name='settings')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
