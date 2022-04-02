@@ -1,4 +1,4 @@
-from ast import Pass
+from email import message
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.views import View
@@ -120,8 +120,14 @@ class Note(View):
             mode = request.GET['mode']
         except Exception:
             mode = 'view'
+        try:
+            noteData = note.objects.get(url=link)
+        except Exception:
+            context = {
+                'errorMessage': '404: Note not found.',
+            }
+            return render(request, 'Note/error.html', context=context, status=404)
 
-        noteData = note.objects.get(url=link)
         visibilityForm = NoteVisibilityForm(instance=noteData)
         noteUsersForm = NoteUserForm(instance=noteData)
         context = {
@@ -155,7 +161,10 @@ class Note(View):
             context['visibility'] = noteData.visibility
             return render(request, 'Note/view.html', context=context)
         else:
-            return HttpResponse("You don't have access to this note", )
+            context = {
+                'errorMessage': '403: You do not have access to this note.',
+            }
+            return render(request, 'Note/error.html', context=context, status=403)
 
     def post(self, request, link):
         # update note
@@ -185,13 +194,19 @@ class NoteUser(View):
             return messages.error(request, e)
 
 
-class UpdateNote(View):
-    def post(self, request, link):
-        prompt = json.loads(request.body)['content']
+class Recommendation(View):
+    def post(self, request):
+        prompt = json.loads(request.body)['content'].replace('<p>', '').replace('</p>', '\n').replace('<br>', '')
         print(prompt)
         # data = getRecommendation(prompt)
-        print('data')
-        return JsonResponse({'status': 'ok', 'content': 'data'})
+        data = prompt + 'data'
+        content = ''
+        for i in data.split('\n'):
+            if i == '':
+                i = '<br>'
+            content += '<p>' + i.replace('\n', '') + '</p>'
+        print(content)
+        return JsonResponse({'status': 'ok', 'content': data})
 
 
 class Settings(View):

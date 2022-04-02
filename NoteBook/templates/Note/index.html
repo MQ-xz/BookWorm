@@ -15,6 +15,7 @@
         {% endif %}
         <h2>{{ note.title }}</h2>
         <p>{{ note.description }} {{ mode }}</p>
+        <hr>
     </div>
     <div class="col-md-3">
         <i class="fas fa-share-alt" data-mdb-toggle="modal" data-mdb-target="#share"></i>
@@ -96,19 +97,19 @@
 
     function test(data) {
         console.log(data)
-        document.getElementsByClassName('ql-editor')[0].innerText += data['content'];
+        document.getElementsByClassName('ql-editor')[0].innerHTML = data['content'];
     }
 
     function isKeyPressed(event) {
         if (event.shiftKey) {
             let text = document.getElementsByClassName('ql-editor')[0];
-            fetch('/updateNote/{{ note.url }}', {
+            fetch('/recommendation', {
                 method: 'POST',
                 headers: {
                     'X-CSRFToken': '{{ csrf_token }}'
                 },
                 body: JSON.stringify({
-                    content: text.innerText
+                    content: text.innerHTML
                 })
             }).then(response => response.json())
                 .then(data => test(data));
