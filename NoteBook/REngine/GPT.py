@@ -5,16 +5,38 @@ from BookWorm.settings import OPENAI_API_KEY
 openai.api_key = OPENAI_API_KEY
 
 
-def getRecommendation(prompt):
+SETTINGS = {
+    'NoteTacking': {
+        'engine': 'text-davinci-002',
+        'temperature': 0.3,
+        'max_tokens': 150,
+        'top_p': 1.0,
+        'frequency_penalty': 0.0,
+        'presence_penalty': 0.0
+    },
+    'QuestionAnswering': {
+        'engine': 'text-davinci-002',
+        'temperature': 0,
+        'max_tokens': 60,
+        'top_p': 1.0,
+        'frequency_penalty': 0.0,
+        'presence_penalty': 0.0
+    }
+}
+
+
+def getRecommendation(prompt, SETTING='NoteTacking'):
     # Get the recommendation for the user
     response = openai.Completion.create(
-        engine="text-davinci-002",
+        engine=SETTINGS[SETTING]['engine'],
         prompt=prompt,
-        temperature=0.3,
-        max_tokens=150,
-        top_p=1.0,
-        frequency_penalty=0.0,
-        presence_penalty=0.0
+        temperature=SETTINGS[SETTING]['temperature'],
+        max_tokens=SETTINGS[SETTING]['max_tokens'],
+        top_p=SETTINGS[SETTING]['top_p'],
+        frequency_penalty=SETTINGS[SETTING]['frequency_penalty'],
+        presence_penalty=SETTINGS[SETTING]['presence_penalty']
     )
     print(response)
     return response.choices[0].text
+
+#function for prime number
