@@ -1,5 +1,3 @@
-from email import message
-from xml.etree.ElementInclude import include
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.views import View
@@ -22,7 +20,7 @@ def index(request):
             'user': request.user,
             'notes': notes
         }
-        if note:
+        if notes:
             last_edited = note.objects.filter(owner=request.user).order_by('-updated_at')[0].url
             return redirect('note', last_edited)
         return render(request=request, template_name="Main/index.html", context=context)
@@ -199,8 +197,8 @@ class Recommendation(View):
     def post(self, request):
         prompt = json.loads(request.body)['content'].replace('<p>', '').replace('</p>', '\n').replace('<br>', '')
         print(prompt)
-        # data = getRecommendation(prompt)
-        data = prompt + 'data'
+        data = getRecommendation(prompt)
+        data = prompt + data
         content = ''
         for i in data.split('\n'):
             if i == '':
