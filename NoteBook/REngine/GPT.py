@@ -6,7 +6,7 @@ openai.api_key = OPENAI_API_KEY
 
 
 SETTINGS = {
-    'NoteTacking': {
+    'NoteTaking': {
         'engine': 'text-davinci-002',
         'temperature': 0.3,
         'max_tokens': 150,
@@ -25,7 +25,7 @@ SETTINGS = {
 }
 
 
-def getRecommendation(prompt, SETTING='NoteTacking'):
+def getRecommendation(prompt, SETTING='NoteTaking'):
     # Get the recommendation for the user
     response = openai.Completion.create(
         engine=SETTINGS[SETTING]['engine'],
@@ -38,5 +38,3 @@ def getRecommendation(prompt, SETTING='NoteTacking'):
     )
     print(response)
     return response.choices[0].text
-
-#function for prime number
