@@ -197,15 +197,29 @@ class Recommendation(View):
     def post(self, request):
         prompt = json.loads(request.body)['content'].replace('<p>', '').replace('</p>', '\n').replace('<br>', '')
         print(prompt)
-        data = getRecommendation(prompt)
-        data = prompt + data
-        content = ''
-        for i in data.split('\n'):
-            if i == '':
-                i = '<br>'
-            content += '<p>' + i.replace('\n', '') + '</p>'
-        print(content)
-        return JsonResponse({'status': 'ok', 'content': data})
+        data = getRecommendation(prompt.replace('   ', ''))
+        # data = [
+        #     {
+        #     "text": "Python is a high level programming language that is widely used in many different application domains."
+        #     },
+        #     {
+        #     "text": "22Python is a high level programming language that is widely used in many different application domains."
+        #     },
+        #     {
+        #     "text": "23Python is a high level programming language that is widely used in many different application domains."
+        #     },
+        #     {
+        #     "text": "24Python is a high level programming language that is widely used in many different application domains."
+        #     }
+        # ]
+        # data = prompt + 'data'
+        # content = ''
+        # for i in data.split('\n'):
+        #     if i == '':
+        #         i = '<br>'
+        #     content += '<p>' + i.replace('\n', '') + '</p>'
+        # print(content)
+        return JsonResponse({'status': 'ok', 'recommends': data})
 
 
 class Settings(View):

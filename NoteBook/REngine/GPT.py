@@ -37,4 +37,4 @@ def getRecommendation(prompt, SETTING='NoteTaking'):
         presence_penalty=SETTINGS[SETTING]['presence_penalty']
     )
     print(response)
-    return response.choices[0].text
+    return response.choices
