@@ -90,7 +90,7 @@
             cardBody.className = 'card-body';
             cardBody.innerText = item['text'];
             cardBody.onclick = function () {
-                document.getElementsByClassName('ql-editor')[0].innerHTML += item['text'];
+                document.getElementsByClassName('ql-editor')[0].innerHTML = item['text'];
             };
             card.appendChild(cardBody);
 

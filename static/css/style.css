@@ -38,6 +38,14 @@ nav-link.selected {
     color: #EEEEEE;
 }
 
+.form-control {
+    color: #EEEEEE;
+}
+
+.active {
+    color: #EEEEEE;
+}
+
 .modal-content {
     background-color: #393E46;
     color: #EEEEEE;
