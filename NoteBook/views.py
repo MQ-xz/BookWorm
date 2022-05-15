@@ -1,3 +1,4 @@
+from distutils.log import Log
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.views import View
@@ -58,11 +59,12 @@ class SignUp(View):
     def post(self, request):
         form = SignUpForm(request.POST)
         if form.is_valid():
-            user = form.save()
-            login(request, user)
+            form.save()
+            # login(request, user)
             messages.success(request, "Registration successful.")
-            return redirect(index)
+            return redirect('login')
         else:
+            print(form.error_messages)
             for msg in form.error_messages:
                 messages.warning(request, f"{msg}: {form.error_messages[msg]}")
             return render(request, 'Auth/signup.html', {'form': form})

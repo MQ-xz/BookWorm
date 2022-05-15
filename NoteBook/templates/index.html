@@ -1,7 +1,44 @@
-{% extends 'base.html' %}
-{% block title%} Home {% endblock %}
-{% block content %}
-<h1>Hello {{ user }} B00kW0rms 😊 !</h1>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
 
-<a href="{% url 'logout' %}">logout</a>
-{% endblock %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'Images/favicon.ico' %}">
+
+    <title>BookWorm</title>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <li class="nav-link"><a href="">BookWorm</a></li>
+        <li class="nav-link"><a href="{% url 'login' %}">Login</a></li>
+        <li class="nav-link"><a href="{% url 'signup' %}">Register</a></li>
+    </div>
+    <!-- End of Navbar -->
+
+    <div class="hero-section">
+        <div class="hero-section-content">
+            <h1>Welcome</h1>
+            <h3>To BookWorm</h3>
+            <hr>
+            <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque impedit temporibus dignissimos magni
+                numquam tempora quo nihil? Voluptatum commodi vitae aperiam, libero esse itaque aliquid fugiat quo sed
+                repellendus exercitationem.
+            </p>
+            <button class="btn btn1">LOGIN</button>
+            <button class="btn btn2">REGISTER</button>
+        </div>
+        <div class="hero-section-img">
+            <img src="{% static 'Images/769.jpg' %}" alt="logo image" style="width: 500px;">
+        </div>
+    </div>
+</body>
+
+</html>
