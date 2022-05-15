@@ -2,8 +2,8 @@
 {% load static %}
 {% block content %}
 
-<div class="row" style="margin: 5px;">
-    <div class="col-md-2" style="min-height: 789px;">
+<div class="row" style="margin: 10px;">
+    <div class="col-md-2 shadow-2-strong sidebar" style="min-height: 98vh; padding: 10px;">
         {% if user.is_authenticated %}
         <div class="dropdown">
             <button class="btn btn-light dropdown-toggle" data-mdb-ripple-color="dark" type="button"
@@ -34,6 +34,7 @@
             </div>
             <p data-mdb-toggle="modal" data-mdb-target="#newNote" style="text-align: right; margin-top: 10px;">New
                 note+</p>
+
             <!-- Modal -->
             <div class="modal fade" id="newNote" tabindex="-1" aria-labelledby="newNoteLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -79,15 +80,15 @@
     </div>
 
     {% if '?mode=edit' in request.get_full_path %}
-    <div class="col-md-7" style="border-style: solid;">
+    <div class="col-md-7">
         {% else %}
-        <div class="col-md-10" style="border-style: solid;">
+        <div class="col-md-10">
             {% endif %}
             {% block index %}
             {% endblock %}
         </div>
         {% if '?mode=edit' in request.get_full_path %}
-        <div class="col-md-3" style="border-style: solid;">
+        <div class="col-md-3">
             <h5 class="card-title" style="margin-top: 10px;">Recommendations</h5>
             <hr>
             <div id="recommended">

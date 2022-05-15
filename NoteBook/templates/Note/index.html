@@ -14,7 +14,7 @@
         {% endfor %}
         {% endif %}
         <h2>{{ note.title }}</h2>
-        <p>{{ note.description }} {{ mode }}</p>
+        <p>{{ note.description }}</p>
         <hr>
     </div>
     <div class="col-md-3">
@@ -73,27 +73,7 @@
 
 
 <script>
-    // setInterval(function () {
-    //     console.log('hehe')
-    // }, 6000);
-    // let text = document.getElementsByClassName('ql-editor')[0];
-    // text.addEventListener('input', function (event) {
-    //     console.log(text.innerText);
-    // if (event.shiftKey && event.keyCode == 9) {
-    //     console.log("The SHIFT key was pressed!");
-    // } else {
-    //     console.log("The SHIFT key was not pressed!");
-    // }
-    // fetch('/updateNote/{{ note.url }}', {
-    //     method: 'POST',
-    //     headers: {
-    //         'X-CSRFToken': '{{ csrf_token }}'
-    //     },
-    //     body: JSON.stringify({
-    //         content: text.innerText
-    //     }),
-    // })
-    // });
+
 
     function test(data) {
         datas = data['recommends'];
