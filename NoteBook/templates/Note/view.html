@@ -1,0 +1,13 @@
+{% extends 'Main/nav.html' %}
+{% block title %} {{ note.title }} {% endblock %}
+{% block index %}
+{% include 'django_quill/media.html' %}
+
+<div class="container">
+    {{ visibility }}
+    <h2 id="h2ost-title">{{note.title}}</h2>
+    <p>By : {{ note.owner }}</p>
+    <hr>
+    {{ note.content.html | safe}}
+</div>
+{% endblock %}

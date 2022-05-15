@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title%} Login {% endblock %}
+{% block content %}
+
+<div class="container" align="center">
+    <!-- <img src="{% static 'Images/logo.png' %}" alt="Logo"> -->
+    <h1 class="display-1" style="margin-top: 20vh;"><strong>BookWorm</strong></h1>
+    <h3 style="color: #0e52c1;">Login</h3>
+    <form style="max-width: 30%;" method="post">
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}" role="alert">
+            {{ message.message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% csrf_token %}
+        <!-- Email input -->
+        <div class="form-outline mb-4">
+            <input type="{{ form.username.label }}" id="{{ form.username.id }}" name="{{ form.username.name }}"
+                class="form-control" required />
+            <label class="form-label" for="{{ form.username.id }}">{{ form.username.label }}</label>
+        </div>
+
+        <!-- Password input -->
+        <div class="form-outline mb-4">
+            <input type="{{ form.password.label }}" id="{{ form.password.id }}" name="{{ form.password.name }}"
+                class="form-control" required />
+            <label class="form-label" for="{{ form.password.id }}">{{ form.password.label }}</label>
+        </div>
+
+        <!-- 2 column grid layout for inline styling -->
+        <div class="row mb-4">
+            <div class="col">
+                <a href="{% url 'signup' %}">New User!</a>
+            </div>
+            <div class="col">
+                <a href="#!">Forgot password?</a>
+            </div>
+        </div>
+
+        <!-- Submit button -->
+        <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,56 @@
+.main {
+    background-color: #222831;
+    color: #EEEEEE;
+}
+
+nav-link.selected {
+    background-color: #393E46;
+    color: aqua;
+
+}
+
+.sidebar {
+    background-color: #393E46;
+}
+
+.nav-tabs .nav-link.active {
+    background-color: #222831
+}
+
+.nav-tabs .nav-link:hover {
+    background-color: #222831
+}
+
+.dropdown {
+    background-color: #222831;
+}
+
+.btn-light {
+    background-color: #CFD8DC;
+}
+
+.ql-toolbar.ql-snow {
+    background-color: #CFD8DC;
+}
+
+.card-body {
+    background-color: #393E46;
+    color: #EEEEEE;
+}
+
+.form-control {
+    color: #EEEEEE;
+}
+
+.active {
+    color: #EEEEEE;
+}
+
+.modal-content {
+    background-color: #393E46;
+    color: #EEEEEE;
+}
+
+.form-outline .form-control~.form-label {
+    color: #EEEEEE;
+}

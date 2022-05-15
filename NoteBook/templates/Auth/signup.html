@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title%} SignUp {% endblock %}
+{% block content %}
+
+<div class="container" align="center">
+    <!-- <img src="{% static 'Images/logo.jpg' %}" alt="My image"> -->
+    <h1 class="display-1" style="margin-top: 20vh;"><strong>BookWorm</strong></h1>
+    <h3 style="color: #0e52c1;">Register</h3>
+    <form style="max-width: 30%;" method="post">
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}" style="color: red;" role="alert">
+            {{ message.message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% csrf_token %}
+        <div class="form-outline mb-4">
+            <input type="{{ form.username.label }}" id="{{ form.username.id }}" name="{{ form.username.name }}"
+                class="form-control" required />
+            <label class="form-label" for="{{ form.username.id }}">{{ form.username.label }}</label>
+        </div>
+
+        <div class="form-outline mb-4">
+            <input type="email" id="{{ form.email.id }}" name="{{ form.email.name }}" class="form-control" required />
+            <label class="form-label" for="{{ form.email.id }}">{{ form.email.label }}</label>
+        </div>
+
+        <!-- Password input -->
+        <div class="form-outline mb-4">
+            <input type="{{ form.password1.label }}" id="{{ form.password1.id }}" name="{{ form.password1.name }}"
+                class="form-control" required />
+            <label class="form-label" for="{{ form.password1.id }}">{{ form.password1.label }}</label>
+        </div>
+        <div class="form-outline mb-4">
+            <input type="{{ form.password1.label }}" id="{{ form.password2.id }}" name="{{ form.password2.name }}"
+                class="form-control" required />
+            <label class="form-label" for="{{ form.password2.id }}">{{ form.password2.label }}</label>
+        </div>
+        <!-- 2 column grid layout for inline styling -->
+        <div class="row mb-4">
+            <div class="col d-flex justify-content-center">
+            </div>
+
+            <div class="col">
+                <!-- Simple link -->
+                <a href="{% url 'login' %}">Already Have an Account!</a>
+            </div>
+        </div>
+
+        <!-- Submit button -->
+        <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+
+    </form>
+</div>
+
+{% endblock %}

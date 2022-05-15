@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title%} New Note {% endblock %}
+{% block content %}
+{% include 'django_quill/media.html' %}
+
+
+<!-- <h1>New Note</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">add</button>}
+</form>  -->
+
+<form method="post">
+    {% csrf_token %}
+    <div class="form-outline mb-4">
+        <input type="{{ form.name.label }}" id="{{ form.name.id }}" name="{{ form.name.name }}" class="form-control"
+            required />
+        <label class="form-label" for="{{ form.username.id }}">{{ form.username.label }}</label>
+    </div>
+
+</form>
+{% endblock %}
