@@ -32,11 +32,11 @@
                 numquam tempora quo nihil? Voluptatum commodi vitae aperiam, libero esse itaque aliquid fugiat quo sed
                 repellendus exercitationem.
             </p>
-            <button class="btn btn1">LOGIN</button>
-            <button class="btn btn2">REGISTER</button>
+            <a href="{% url 'login' %}"><button class="btn btn1">LOGIN</button></a>
+            <a href="{% url 'signup' %}"><button class="btn btn2">SIGN UP</button></a>
         </div>
         <div class="hero-section-img">
-            <img src="{% static 'Images/769.jpg' %}" alt="logo image" style="width: 500px;">
+            <img src="{% static 'Images/logo.png' %}" alt="logo image" style="width: 480px;">
         </div>
     </div>
 </body>
