@@ -4,9 +4,13 @@
 {% block index %}
 <div class="container">
     <div class="col">
-        <div class="text-center" style="margin-top: 10%;">
+        <div class="text-center" style="margin-top: 7%;">
             <h1>Welcome to BookWorm</h1>
-            <img src="{% static 'Images/logo.jpg' %}" alt="">
+            <!-- <img src="{% static 'Images/logo.jpg' %}" alt=""> -->
+            <!-- play video with autoplay looping -->
+            <video autoplay loop muted style="width: 1000px;">
+                <source src="{% static 'Video/promo.mp4' %}" type="video/mp4">
+            </video>
             <br>
             <button type="button" class="btn btn-light" data-mdb-ripple-color="dark" data-mdb-toggle="modal"
                 data-mdb-target="#newNote">Start your First Note</button>

@@ -14,6 +14,11 @@ from .REngine.GPT import getRecommendation
 
 
 # Create your views here.
+
+def home(request):
+    return render(request=request, template_name="index.html")
+
+
 def index(request):
     if request.user.is_authenticated:
         notes = note.objects.filter(owner=request.user)
@@ -43,7 +48,7 @@ class Login(View):
             if user is not None:
                 login(request, user)
                 # messages.info(request, f"You are now logged in as {username}.")
-                return redirect(index)
+                return redirect('index')
             else:
                 messages.error(request, "Invalid username or password.")
         else:

@@ -78,7 +78,7 @@
     function test(data) {
         datas = data['recommends'];
         let div = document.getElementById('recommended');
-        div.innerHTML = '';
+        // div.innerHTML = '';
 
         datas.forEach(function (item) {
 
@@ -91,6 +91,7 @@
             cardBody.innerText = item['text'];
             cardBody.onclick = function () {
                 document.getElementsByClassName('ql-editor')[0].innerHTML += item['text'];
+                div.innerHTML = '';
             };
             card.appendChild(cardBody);
 
