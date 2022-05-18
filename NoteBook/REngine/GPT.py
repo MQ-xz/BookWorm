@@ -5,6 +5,8 @@ from BookWorm.settings import OPENAI_API_KEY
 openai.api_key = OPENAI_API_KEY
 
 
+# our models curie:ft-personal-2022-05-16-20-22-49
+
 SETTINGS = {
     'NoteTaking': {
         'engine': 'text-davinci-002',
