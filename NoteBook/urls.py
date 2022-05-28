@@ -14,7 +14,9 @@ urlpatterns = [
     path('newNote', NewNote.as_view(), name='newNote'),
     path('note/<slug:link>', Note.as_view(), name='note'),
     path('NoteVisibility/<slug:link>', NoteVisibility.as_view(), name='NoteVisibility'),
-    path('NoteUser/<slug:link>', NoteUser.as_view(), name='NoteUser'),
+    path('NoteUser/<slug:link>', NewUser.as_view(), name='NewUser'),
+
+    path('removeUser/<int:id>', RemoveUser.as_view(), name='removeUser'),
 
     path('recommendation', Recommendation.as_view(), name='recommendation'),
 
