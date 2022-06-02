@@ -4,6 +4,9 @@
 
 <div class="row" style="margin: 10px;">
     <div class="col-md-2 shadow-2-strong sidebar" style="min-height: 98vh; padding: 10px;">
+        <a href="{% url 'home' %}">
+            <h1 style="text-align: center;">BookWorm</h1>
+        </a>
         {% if user.is_authenticated %}
         <div class="dropdown">
             <button class="btn btn-light dropdown-toggle" data-mdb-ripple-color="dark" type="button"
@@ -14,7 +17,7 @@
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="width: 100%">
                 <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="{% url 'settings' %}">settings</a></li>
+                <!-- <li><a class="dropdown-item" href="{% url 'settings' %}">settings</a></li> -->
                 <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
             </ul>
         </div>
@@ -68,7 +71,7 @@
         </div>
         {% else %}
         <h4>Welcome to BookWorm</h4>
-        <img src="{% static 'Images/logo.jpg' %}" alt="" width="275px">
+        <img src="{% static 'Images/logo.png' %}" alt="" width="275px">
         <br>
         <a href="{% url 'login' %}">
             <button type="button" class="btn btn-light" data-mdb-ripple-color="dark">Start your First Note by

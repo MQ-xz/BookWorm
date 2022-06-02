@@ -14,6 +14,11 @@ from .REngine.GPT import getRecommendation
 
 
 # Create your views here.
+
+def home(request):
+    return render(request=request, template_name="index.html")
+
+
 def index(request):
     if request.user.is_authenticated:
         notes = note.objects.filter(owner=request.user)
@@ -43,7 +48,7 @@ class Login(View):
             if user is not None:
                 login(request, user)
                 # messages.info(request, f"You are now logged in as {username}.")
-                return redirect(index)
+                return redirect('index')
             else:
                 messages.error(request, "Invalid username or password.")
         else:
@@ -149,6 +154,7 @@ class Note(View):
             notes = note.objects.filter(owner=request.user)
             context['notes'] = notes
             context['mode'] = mode
+            context['users'] = noteUser.objects.filter(note=noteData)
             if mode == 'edit':
                 context['form'] = NoteForm(instance=noteData)
                 return render(request, 'Note/index.html', context=context)
@@ -186,13 +192,13 @@ class NoteVisibility(View):
             return messages.error(request, e)
 
 
-class NoteUser(View):
-    def post(self, request, link):
-        try:
-            noteUser.objects.filter(note=link).update(can_edit=request.POST['can_edit'])
-            return redirect(request.META['HTTP_REFERER'])
-        except Exception as e:
-            return messages.error(request, e)
+# class NoteUser(View):
+#     def post(self, request, link):
+#         try:
+#             noteUser.objects.filter(note=link).update(can_edit=request.POST['can_edit'])
+#             return redirect(request.META['HTTP_REFERER'])
+#         except Exception as e:
+#             return messages.error(request, e)
 
 
 class Recommendation(View):
@@ -234,3 +240,29 @@ class UserSearch(View):
         users = User.objects.filter(username__startswith=request.GET['username'])
         print(users)
         return JsonResponse(list(users.values('username', 'email')), safe=False)
+
+
+class RemoveUser(View):
+    def get(self, request, id):
+        try:
+            noteUser.objects.get(id=id).delete()
+            return redirect(request.META['HTTP_REFERER'])
+        except Exception as e:
+            return messages.error(request, e)
+
+
+class NewUser(View):
+    def post(self, request, link):
+        try:
+            user = User.objects.get(username=request.POST['username'])
+            noteid = note.objects.get(url=link).id
+            print(user.id, noteid)
+            noteUser.objects.create(
+                note_id=noteid,
+                user_id=user.id,
+                can_edit=request.POST['role']
+            )
+            return redirect(request.META['HTTP_REFERER'])
+        except Exception as e:
+            messages.warning(request, e)
+            return redirect(request.META['HTTP_REFERER'])

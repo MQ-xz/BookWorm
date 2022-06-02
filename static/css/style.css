@@ -54,3 +54,8 @@ nav-link.selected {
 .form-outline .form-control~.form-label {
     color: #EEEEEE;
 }
+
+/* change table font color */
+* {
+    color: #EEEEEE;
+}
