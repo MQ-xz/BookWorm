@@ -55,7 +55,6 @@ nav-link.selected {
     color: #EEEEEE;
 }
 
-/* change table font color */
-/* * {
-    color: #EEEEEE;
-} */
+.input {
+    background-color: aqua;
+}
