@@ -31,8 +31,8 @@
             <div class="nav flex-column nav-tabs text-center" id="v-tabs-tab" role="tablist"
                 aria-orientation="vertical">
                 {% for note in notes %}
-                <a class="nav-link {% if note.url == url %} active {% endif %}"
-                    href="{% url 'note' note.url %}">{{note.title}}</a>
+                <a class="nav-link {% if note.url == url %} active {% endif %}" href="{% url 'note' note.url %}"
+                    style="color: #eee">{{note.title}}</a>
                 {% endfor %}
             </div>
             <p data-mdb-toggle="modal" data-mdb-target="#newNote" style="text-align: right; margin-top: 10px;">New

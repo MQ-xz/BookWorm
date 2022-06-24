@@ -58,3 +58,8 @@ nav-link.selected {
 .input {
     background-color: aqua;
 }
+
+a {
+    text-decoration: none;
+    color: #fff;
+}

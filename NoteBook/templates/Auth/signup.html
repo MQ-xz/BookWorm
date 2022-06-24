@@ -6,7 +6,7 @@
 <div class="container" align="center">
     <img src="{% static 'Images/logo.png' %}" alt="Logo" style="width: 380px;">
     <!-- <h1 class="display-1" style="margin-top: 20vh;"><strong>BookWorm</strong></h1> -->
-    <h3 style="color: #0e52c1; margin-top: -8vh;">Register</h3>
+    <h3 style="color: #ffffff; margin-top: -8vh;">Register</h3>
     <form style="max-width: 30%;" method="post">
         {% if messages %}
         {% for message in messages %}
@@ -18,24 +18,25 @@
         {% csrf_token %}
         <div class="form-outline mb-4">
             <input type="{{ form.username.label }}" id="{{ form.username.id }}" name="{{ form.username.name }}"
-                class="form-control" required />
+                class="form-control" required style="color: #eee" />
             <label class="form-label" for="{{ form.username.id }}">{{ form.username.label }}</label>
         </div>
 
         <div class="form-outline mb-4">
-            <input type="email" id="{{ form.email.id }}" name="{{ form.email.name }}" class="form-control" required />
+            <input type="email" id="{{ form.email.id }}" name="{{ form.email.name }}" class="form-control" required
+                style="color: #eee" />
             <label class="form-label" for="{{ form.email.id }}">{{ form.email.label }}</label>
         </div>
 
         <!-- Password input -->
         <div class="form-outline mb-4">
             <input type="{{ form.password1.label }}" id="{{ form.password1.id }}" name="{{ form.password1.name }}"
-                class="form-control" required />
+                class="form-control" required style="color: #eee" />
             <label class="form-label" for="{{ form.password1.id }}">{{ form.password1.label }}</label>
         </div>
         <div class="form-outline mb-4">
             <input type="{{ form.password1.label }}" id="{{ form.password2.id }}" name="{{ form.password2.name }}"
-                class="form-control" required />
+                class="form-control" required style="color: #eee" />
             <label class="form-label" for="{{ form.password2.id }}">{{ form.password2.label }}</label>
         </div>
         <!-- 2 column grid layout for inline styling -->
@@ -45,10 +46,10 @@
 
             <div class="col">
                 <!-- Simple link -->
-                <a href="{% url 'login' %}">Already Have an Account!</a>
+                <a href="{% url 'login' %}" style="color: #eee">Already Have an Account!</a>
             </div>
             <div class="col">
-                <a href="{% url 'index' %}">Back to Home</a>
+                <a href="{% url 'index' %}" style="color: rgb(255, 255, 255)">Back to Home</a>
             </div>
         </div>
 
