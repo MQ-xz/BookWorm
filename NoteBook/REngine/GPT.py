@@ -15,14 +15,6 @@ SETTINGS = {
         'top_p': 1.0,
         'frequency_penalty': 0.0,
         'presence_penalty': 0.0
-    },
-    'QuestionAnswering': {
-        'engine': 'text-davinci-002',
-        'temperature': 0,
-        'max_tokens': 60,
-        'top_p': 1.0,
-        'frequency_penalty': 0.0,
-        'presence_penalty': 0.0
     }
 }
 
