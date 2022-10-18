@@ -68,7 +68,7 @@ li:nth-child(2) {
 
 .hero-section-content h3 {
     margin-top: -35px;
-    color: #4475e2;
+    color: #ffffff;
 }
 
 .hero-section-content hr {
@@ -104,10 +104,11 @@ li:nth-child(2) {
 .hero-section-content .btn2 {
     border: 2px solid #4475e2;
     margin-left: 10px;
-    color: #4475e2;
+    color: #ffffff;
 }
 
 .hero-section-content .btn2:hover {
     background-color: #4475e2;
     color: #fff;
 }
+

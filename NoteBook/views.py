@@ -192,41 +192,12 @@ class NoteVisibility(View):
             return messages.error(request, e)
 
 
-# class NoteUser(View):
-#     def post(self, request, link):
-#         try:
-#             noteUser.objects.filter(note=link).update(can_edit=request.POST['can_edit'])
-#             return redirect(request.META['HTTP_REFERER'])
-#         except Exception as e:
-#             return messages.error(request, e)
-
-
 class Recommendation(View):
     def post(self, request):
         prompt = json.loads(request.body)['content'].replace('<p>', '').replace('</p>', '\n').replace('<br>', '')
         print(prompt)
         data = getRecommendation(prompt.replace('   ', ''))
-        # data = [
-        #     {
-        #         "text": "Python is a high level programming language that is widely used in many different application domains."
-        #     },
-        #     {
-        #         "text": "22Python is a high level programming language that is widely used in many different application domains."
-        #     },
-        #     {
-        #         "text": "23Python is a high level programming language that is widely used in many different application domains."
-        #     },
-        #     {
-        #         "text": "24Python is a high level programming language that is widely used in many different application domains."
-        #     }
-        # ]
-        # data = prompt + 'data'
-        # content = ''
-        # for i in data.split('\n'):
-        #     if i == '':
-        #         i = '<br>'
-        #     content += '<p>' + i.replace('\n', '') + '</p>'
-        # print(content)
+        # data = 'hehe'
         return JsonResponse({'status': 'ok', 'recommends': data})
 
 
