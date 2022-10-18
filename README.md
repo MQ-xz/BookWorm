@@ -12,7 +12,7 @@ A Note Taking application integrated with AI , which enables us to take down not
 
 # Demo
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/SvYyD_LUJXo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+[![DEMO](https://img.youtube.com/vi/SvYyD_LUJXo/0.jpg)](https://www.youtube.com/watch?v=SvYyD_LUJXo)
 
 # Team
 
