@@ -11,7 +11,8 @@ A Note Taking application integrated with AI , which enables us to take down not
 - [Git](https://git-scm.com/download/win)
 
 # Demo
-![Demo](static/Video/demo.GIF)
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/SvYyD_LUJXo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 # Team
 
