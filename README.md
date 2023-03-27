@@ -1,7 +1,7 @@
 # BookWorm
-An AI based Smart Notebook.
+An AI based Smart Notebook
 
-A Note Taking application integrated with AI , which enables us to take down notes by using recommendations with help of [OpenAI API](https://openai.com/api/)
+A Note Taking application integrated with AI , which enables us to take down notes by using recommendations with help of [OpenAI API](https://openai.com/api/)'s [GPT-3](https://arxiv.org/abs/2005.14165) model.
 
 ## Pre-requirements
 
