@@ -1,7 +1,19 @@
 # BookWorm
-An AI based Smart Notebook
 
-A Note Taking application integrated with AI , which enables us to take down notes by using recommendations with help of [OpenAI API](https://openai.com/api/)'s [GPT-3](https://arxiv.org/abs/2005.14165) model.
+An AI-based Smart Notebook
+
+BookWorm is a note-taking application integrated with AI, enabling users to take notes with recommendations powered by [OpenAI API](https://openai.com/api)'s [GPT-3](https://arxiv.org/abs/2005.14165) model.
+
+---
+
+## Features
+
+- AI-powered note recommendations
+- User-friendly interface
+- Integration with OpenAI's GPT-3 model
+- Cross-platform compatibility
+
+---
 
 ## Pre-requirements
 
@@ -10,11 +22,42 @@ A Note Taking application integrated with AI , which enables us to take down not
 - IDE ([VSCode](https://code.visualstudio.com/) recommended)
 - [Git](https://git-scm.com/download/win)
 
-# Demo
+---
+
+## Getting Started
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-repo/BookWorm.git
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd BookWorm
+   ```
+3. Install the required dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+### Usage
+
+1. Run the application:
+   ```bash
+   python manage.py runserver
+   ```
+2. Open your browser and navigate to `http://127.0.0.1:8000/`.
+
+---
+
+## Demo
 
 [![DEMO](https://img.youtube.com/vi/SvYyD_LUJXo/0.jpg)](https://www.youtube.com/watch?v=SvYyD_LUJXo)
 
-# Team
+---
+
+## Team
 
 <table>
   <tr>
