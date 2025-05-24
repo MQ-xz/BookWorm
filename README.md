@@ -67,9 +67,3 @@ BookWorm is a note-taking application integrated with AI, enabling users to take
    <td align="center"><a href="https://github.com/MQ-xz"><img src="https://avatars.githubusercontent.com/MQ-xz?s=100" width="100px;" alt=""/><br /><sub><b>Mahshooq Zubair​</b></sub></a><br /><h6>Member</h6></td>
    <td align="center"><a href=""><img src="https://avatars.githubusercontent.com/404?s=100" width="100px;" alt=""/><br /><sub><b>Aadith S​</b></sub></a><br /><h6>Member</h6></td>
 </table>
-
----
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
